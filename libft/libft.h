@@ -12,6 +12,7 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# define BUFF_SIZE 42
 
 # include <string.h>
 
@@ -26,6 +27,19 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct		s_file
+{
+	int				fd;
+	int				ret;
+	char			*cont;
+	char			*cnw;
+	char			*tmp;
+	char			buf[BUFF_SIZE + 1];
+	struct s_file	*next;
+}					t_file;
+
+int					get_next_line(const int fd, char **line);
 
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);

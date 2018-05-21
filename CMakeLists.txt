@@ -60,7 +60,16 @@ set(SOURCE_FILES main.c fdf.h reader.c libft/ft_atoi.c
         libft/ft_strnequ.c
         libft/ft_strnew.c
         libft/ft_strnstr.c
-
+        libft/ft_strrchr.c
+        libft/ft_strsplit.c
+        libft/ft_strstr.c
+        libft/ft_strsub.c
+        libft/ft_strtrim.c
+        libft/ft_tolower.c
+        libft/ft_toupper.c
+        libft/ft_writeendl.c
+        libft/get_next_line.c
+        libft/libft.h
         )
 
 add_executable(fdf_linux ${SOURCE_FILES})

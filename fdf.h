@@ -21,6 +21,7 @@ typedef	struct		s_mlx
 	char			*file;
 	char 			*line;
 	int 			*img_str;
+	int 			width;
 	int 			sl;
 	int 			end;
 	int 			bpp;
