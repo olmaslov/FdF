@@ -18,12 +18,11 @@
 
 typedef	struct		s_pixel
 {
-	int				x;
-	int				y;
-	int				z;
-	int				new_x;
-	int				new_y;
-	int				new_pos_z;
+	int 			x;
+	int 			y;
+	int				next_x;
+	int 			next_y;
+
 	int				col;
 }					t_pixel;
 
@@ -35,16 +34,21 @@ typedef	struct		s_mlx
 	char			*file;
 	char 			*line;
 	int 			*img_str;
+	int 			max_y;
+	int 			max_x;
 	int 			width;
 	int				height;
 	int 			sl;
 	int 			end;
 	int 			bpp;
 	int 			i;
-	t_pixel			pix[2000][2000];
+	t_pixel			pix[1001][1001];
 }					t_mlx;
 
-void				drawCircle(int x0, int y0, int radius, t_mlx *mlx);
+void				print_y(t_mlx *mlx);
+void				print_x(t_mlx *mlx);
 void				read_file(t_mlx *mlx);
+void				print_lines(int x0, int x1, int y0, int y1, t_mlx *mlx);
+void				net_print(t_mlx *mlx);
 
 #endif //FDF_LINUX_FDF_H

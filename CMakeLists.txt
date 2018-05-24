@@ -70,7 +70,7 @@ set(SOURCE_FILES main.c fdf.h reader.c libft/ft_atoi.c
         libft/ft_writeendl.c
         libft/get_next_line.c
         libft/libft.h
-        )
+        drawer.c)
 
 add_executable(fdf_linux ${SOURCE_FILES})
 include_directories(/usr/local/include)
