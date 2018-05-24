@@ -9,32 +9,35 @@ void		print_y(t_mlx *mlx)
 	int x;
 	int y;
 
-	x = 0;
-	y = 0;
+	x = mlx->start[0] - 1;
+	y = mlx->start[1] - 1;
 	while (y != mlx->max_y)
 	{
-		if (mlx->pix[0][y].col != 0)
+		if (mlx->pix[x][y].next_y != 0)
 		{
 			//mlx->img_str[i * mlx->sl / 4 + 0] = 0xFFFFFF;
 			print_lines(mlx->pix[x][y].x, mlx->pix[x][y].x, mlx->pix[x][y].y, mlx->pix[x][y].next_y, mlx);
 		}
 		y = mlx->pix[x][y].next_y;
 	}
-//	y = 0;
-//	while (x != mlx->max_x)
-//	{
-//		if (mlx->pix[0][y].col != 0)
-//		{
-//			//mlx->img_str[i * mlx->sl / 4 + 0] = 0xFFFFFF;
-//			print_lines(mlx->pix[x][y].x, mlx->pix[x][y].next_x, mlx->pix[x][y].y, mlx->pix[x][y].next_y, mlx);
-//		}
-//		x = mlx->pix[x][y].next_x;
-//	}
 }
 
 void		print_x(t_mlx *mlx)
 {
+	int x;
+	int y;
 
+	x = mlx->start[0] - 1;
+	y = mlx->start[1] - 1;
+	while (x != mlx->max_x)
+	{
+		if (mlx->pix[x][y].next_x != 0)
+		{
+			//mlx->img_str[i * mlx->sl / 4 + 0] = 0xFFFFFF;
+			print_lines(mlx->pix[x][y].x, mlx->pix[x][y].next_x, mlx->pix[x][y].y, mlx->pix[x][y].y, mlx);
+		}
+		x = (mlx->pix[x][y].next_x == 0) ? x + 1 : mlx->pix[x][y].next_x;
+	}
 }
 
 void		print_lines(int x0, int x1, int y0, int y1, t_mlx *mlx)
@@ -88,34 +91,42 @@ void		net_print(t_mlx *mlx)
 	int j;
 	int space;
 
-	space = 1000 / (((mlx->width >= mlx->height) ? mlx->width : mlx->height) + 1);
+	space = 1000 / (((mlx->width >= mlx->height) ? mlx->width : mlx->height));
 	if (mlx->width >= mlx->height)
-		y = ((space * mlx->height) / 2) - space;
-	else
-		y = (1000 - (space * mlx->height)) / 2;
-	j = 0;
-	while (*(mlx->line) && j <= mlx->height)
 	{
-		if (mlx->width < mlx->height)
-			x = (1000 - (space * mlx->width)) / 2;
+		y = (1000 - ((space * mlx->height)- space)) / 2;
+		mlx->start[0] = y;
+	}
+	else
+	{
+		y = (1000 - (space * mlx->height)) / 2;
+		mlx->start[0] = y;
+	}
+	j = 0;
+	while (*(mlx->line) && j < mlx->height)
+	{
+		if (mlx->width <= mlx->height)
+		{
+			x = (1000 - ((space * mlx->width)- space)) / 2;
+			mlx->start[1] = x;
+		}
 		i = 0;
-		while (i <= mlx->width)
+		while (i < mlx->width)
 		{
 			if (*(mlx->line) > 47 && *(mlx->line) < 58)
 			{
-//				mlx->img_str[y * mlx->sl / 4 + x] = 0xFFFFFF;
-//				mlx->pix[x][y].col = 0xFFFFFF;
-//				mlx->pix[x][y].x = x;
-//				mlx->pix[x][y].y = y;
-//				mlx->pix[x][y].next_x = x + space;
-//				mlx->pix[x][y].next_y = y + space;
-//				if (y + space > mlx->max_y)
-//					mlx->max_y = y + space;
-//				if (x + space> mlx->max_x)
-//					mlx->max_x = x + space;
+				mlx->img_str[y * mlx->sl / 4 + x] = 0xFFFFFF;
+				mlx->pix[x][y].col = 0xFFFFFF;
+				mlx->pix[x][y].x = x;
+				mlx->pix[x][y].y = y;
+				mlx->pix[x][y].next_x = x + space;
+				mlx->pix[x][y].next_y = y + space;
+				if (y + space > mlx->max_y)
+					mlx->max_y = y + space;
+				if (x + space> mlx->max_x)
+					mlx->max_x = x + space;
 				i++;
-				if (*(mlx->line) + 1 > 47  && *(mlx->line) + 1 < 58)
-					print_lines(x, x + space, y, y, mlx);
+//				print_lines(x, x + space, y, y, mlx);
 				x += space;
 			}
 			if (*mlx->line == ',')
@@ -125,5 +136,6 @@ void		net_print(t_mlx *mlx)
 		j++;
 		y += space;
 	}
+//	print_x(mlx);
 //	print_y(mlx);
 }

@@ -42,6 +42,7 @@ typedef	struct		s_mlx
 	int 			end;
 	int 			bpp;
 	int 			i;
+	int				start[2];
 	t_pixel			pix[1001][1001];
 }					t_mlx;
 
