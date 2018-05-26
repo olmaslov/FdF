@@ -132,6 +132,7 @@ void		net_print(t_mlx *mlx)
 	int j;
 	int space;
 
+	x = 0;
 	space = 1000 / (((mlx->width >= mlx->height) ? mlx->width : mlx->height));
 	if (mlx->width >= mlx->height)
 	{
@@ -152,7 +153,7 @@ void		net_print(t_mlx *mlx)
 			mlx->start[1] = x;
 		}
 		i = 0;
-		while (i < mlx->width && x < 1000)
+		while (i < mlx->width && x < 1000 && *(mlx->line)++)
 		{
 			if (*(mlx->line) > 47 && *(mlx->line) < 58)
 			{
@@ -172,11 +173,7 @@ void		net_print(t_mlx *mlx)
 				x += space;
 			}
 			if (*mlx->line == ',')
-			{
-				*mlx->line++;
-				mlx->pix[x - space][y].col = ft_atoi_hex(mlx->line);
-			}
-			*(mlx->line)++;
+				mlx->pix[x - space][y].col = ft_atoi_hex(&*mlx->line++);
 		}
 		j++;
 		y += space;

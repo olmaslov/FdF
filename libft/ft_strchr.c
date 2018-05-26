@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
-	char	*s1;
+//	char	*s1;
 	size_t	sz;
 
-	s1 = (char *)s;
+//	s1 = (char *)s;
 	sz = ft_strlen(s) + 1;
 	return ((char *)ft_memchr((void *)s, c, sz));
 }

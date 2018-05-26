@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
+#include "includes/get_next_line.h"
 
 static int			writeln(t_file **tmp, char ***line)
 {
@@ -19,7 +20,7 @@ static int			writeln(t_file **tmp, char ***line)
 
 	j = 0;
 	i = 0;
-	while ((*tmp)->tmp[i] && (*tmp)->tmp[i] != '\n' && (*tmp)->tmp != '\0')
+	while ((*tmp)->tmp[i] && (*tmp)->tmp[i] != '\n' && (*tmp)->tmp[i] != '\0')
 		i++;
 	if ((*tmp)->tmp[i] == '\n')
 		j = 1;

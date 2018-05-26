@@ -69,10 +69,11 @@ set(SOURCE_FILES main.c fdf.h reader.c libft/ft_atoi.c
         libft/ft_toupper.c
         libft/ft_writeendl.c
         libft/get_next_line.c
-        libft/libft.h
+        libft/includes/libft.h
+        libft/includes/get_next_line.h
         drawer.c)
 
 add_executable(fdf_linux ${SOURCE_FILES})
 include_directories(/usr/local/include)
 target_link_libraries(fdf_linux /usr/local/lib/libmlx.a)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -framework OpenGL -framework AppKit")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lmlx -l Xext -l X11 -L libft/")

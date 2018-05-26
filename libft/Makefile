@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = libft.a
-CFLAGS = -Wall -Werror -Wextra -I. -c
+CFLAGS = -Wall -Werror -Wextra -I ./includes -c
 FILES =  ft_atoi.c\
    ft_bzero.c\
    ft_isalnum.c\
@@ -74,7 +74,8 @@ FILES =  ft_atoi.c\
    ft_rewrite.c\
    ft_writeendl.c\
    ft_minimalize.c\
-   ft_delcomm.c
+   ft_delcomm.c\
+   get_next_line.c
 
 OBJ = $(FILES:%.c=%.o)
 

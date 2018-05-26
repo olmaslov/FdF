@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*sc;
-	int		i;
+//	int		i;
 
-	i = 0;
+//	i = 0;
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
 	sc = ft_strnew(ft_strlen(s1) + ft_strlen(s2));

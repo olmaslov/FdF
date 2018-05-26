@@ -8,13 +8,14 @@
 # define SIN(val) sin(val * PI / 180)
 # define COS(val) cos(val * PI / 180)
 
-#include "libft/libft.h"
+#include "libft/includes/libft.h"
+#include "libft/includes/get_next_line.h"
 #include <stdlib.h>
 #include "mlx.h"
 #include "stdio.h"
 #include "unistd.h"
 
-#define SPACE = 10
+
 
 typedef	struct		s_pixel
 {

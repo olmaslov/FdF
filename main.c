@@ -1,8 +1,8 @@
 #include "fdf.h"
 
-static int	my_key_funct(int keycode, t_mlx *mlx)
+static int	my_key_funct(int keycode)
 {
-	if (keycode == 53)
+	if (keycode == 53 || keycode == 65307)
 		exit(0);
 /*	if (keycode == 49) 												*/
 /*		drawCircle(500, 500, mlx->i++, mlx);*/
