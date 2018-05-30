@@ -11,6 +11,7 @@
 #include "libft/includes/libft.h"
 #include "libft/includes/get_next_line.h"
 #include <stdlib.h>
+#include "math.h"
 #include "mlx.h"
 #include "stdio.h"
 #include "unistd.h"
@@ -23,6 +24,7 @@ typedef	struct		s_pixel
 	int 			y;
 	int				next_x;
 	int 			next_y;
+	int 			z;
 
 	int				col;
 }					t_pixel;
@@ -43,6 +45,11 @@ typedef	struct		s_mlx
 	int 			end;
 	int 			bpp;
 	int 			i;
+	int				x;
+	int 			y;
+	int				map_x;
+	int 			map_y;
+	int 			space;
 	int				start[2];
 	t_pixel			pix[1001][1001];
 }					t_mlx;

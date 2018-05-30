@@ -35,7 +35,6 @@ void		read_file(t_mlx *mlx)
 	mlx->line = "";
 	while (get_next_line(fd, &(tmpln)) > 0)
 	{
-		printf("%s\n", tmpln);
 		if (tmpclp == 0)
 			tmpclp = count_points(tmpln);
 		else if (tmpclp != count_points(tmpln))
@@ -46,7 +45,6 @@ void		read_file(t_mlx *mlx)
 	}
 	mlx->width = tmpclp;
 	mlx->height = height;
-	printf("%s\n", mlx->line);
 	if (!tmpln)
 		exit(write(1, "FILE ERROR\n", 10));
 }
