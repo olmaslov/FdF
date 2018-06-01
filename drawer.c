@@ -137,7 +137,7 @@ void	spin_x(t_mlx *mlx)
 {
 	int		x;
 	int		y;
-	int		py;
+	int		px;
 
 	x = 0;
 	while (x < mlx->map_y)
@@ -145,14 +145,38 @@ void	spin_x(t_mlx *mlx)
 		y = 0;
 		while (y < mlx->map_x)
 		{
-			py = mlx->pix[x][y].y;
-			mlx->pix[x][y].y = py * COS(mlx->y) + mlx->pix[x][y].z * SIN(mlx->y);
-			mlx->pix[x][y].z = (-(py) * SIN(mlx->y)) + mlx->pix[x][y].z * COS(mlx->y);
+			px = mlx->pix[x][y].x;
+//			mlx->pix[mlx->pix[x][y].next_x][y].x = (int)(px * COS(mlx->y) + mlx->pix[x][y].z * SIN(mlx->y));
+			mlx->pix[x][y].x = (int)(px * COS(mlx->y) + mlx->pix[x][y].z * SIN(mlx->y));
+			mlx->pix[x][y].z = (int)((-(px) * SIN(mlx->y)) + mlx->pix[x][y].z * COS(mlx->y));
 			y++;
 		}
 		x++;
 	}
 }
+
+void	spin_y(t_mlx *mlx)
+{
+	int		x;
+	int		y;
+	int		py;
+
+	x = 0;
+	while (x < mlx->map_y)
+	{
+		y = 0;
+		while (y < mlx->map_x )
+		{
+			py = mlx->pix[x][y].y;
+			if (mlx->pix[x][y].y != 0)
+				mlx->pix[x][y].next_y = (int)(py * COS(mlx->y) + mlx->pix[x][y].z * SIN(mlx->y));
+			mlx->pix[x][y].z = (int)((-(py) * SIN(mlx->y)) + mlx->pix[x][y].z * COS(mlx->y));
+			y++;
+		}
+		x++;
+	}
+}
+
 
 void		net_print(t_mlx *mlx)
 {
@@ -168,14 +192,14 @@ void		net_print(t_mlx *mlx)
 		mlx->space = 1000 / (((mlx->width >= mlx->height) ? mlx->width : mlx->height));
 	if (mlx->width >= mlx->height)
 	{
-//		y = (1000 - ((mlx->space * mlx->height)- mlx->space)) / 2;
-		y = 0;
+		y = (1000 - ((mlx->space * mlx->height)- mlx->space)) / 2;
+//		y = 0;
 		mlx->start[0] = y;
 	}
 	else
 	{
-		y = 0;
-//		y = (1000 - (mlx->space * mlx->height)) / 2;
+//		y = 0;
+		y = (1000 - (mlx->space * mlx->height)) / 2;
 		mlx->start[0] = y;
 	}
 	j = 0;
@@ -200,7 +224,7 @@ void		net_print(t_mlx *mlx)
 				//k = y;
 				//while (k < y + mlx->space)
 				//{
-					mlx->pix[x][y].col = 0x000000 + (mlx->pix[x][y].z * 20);
+					mlx->pix[x][y].col = 0xFFFFFF;//0x000000 + (mlx->pix[x][y].z * 20);
 				//	k++;
 				//}
 				i++;
@@ -238,6 +262,7 @@ void		net_print(t_mlx *mlx)
 //
 //	}
 	spin_x(mlx);
+//	spin_y(mlx);
 	print_x(mlx);
 	print_y(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);

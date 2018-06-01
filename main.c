@@ -34,10 +34,10 @@ int			main(int argc, char **argv)
 		mlx->img_ptr = mlx_new_image(mlx->mlx_ptr, 1000, 1000);
 		mlx->img_str = (int *)mlx_get_data_addr(mlx->img_ptr,
 												&(mlx->bpp), &(mlx->sl), &(mlx->end));
+		mlx->x = 25;
+		mlx->y = 5;
 		read_file(mlx);
 		net_print(mlx);
-		mlx->x = 25;
-		mlx->y = 40;
 //		print_lines(0,1000,0,1000, mlx);
 //		print_lines(500,0,1000,0, mlx);
 		mlx_loop(mlx->mlx_ptr);

@@ -37,11 +37,12 @@ void		read_file(t_mlx *mlx)
 	{
 		if (tmpclp == 0)
 			tmpclp = count_points(tmpln);
-		else if (tmpclp != count_points(tmpln))
-			exit(write(1, "Map error", 9));
+//		else if (tmpclp != count_points(tmpln))
+//			exit(write(1, "Map error", 9));
 		tmpln = ft_strjoin(tmpln, " ");
 		mlx->line = ft_strjoin(mlx->line, tmpln);
 		height++;
+		free(tmpln);
 	}
 	mlx->width = tmpclp;
 	mlx->height = height;

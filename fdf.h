@@ -22,10 +22,12 @@ typedef	struct		s_pixel
 {
 	int 			x;
 	int 			y;
+	int 			z;
+	int 			ny;
+	int 			nx;
+	int 			nz;
 	int				next_x;
 	int 			next_y;
-	int 			z;
-
 	int				col;
 }					t_pixel;
 
@@ -51,7 +53,7 @@ typedef	struct		s_mlx
 	int 			map_y;
 	int 			space;
 	int				start[2];
-	t_pixel			pix[1001][1001];
+	t_pixel			pix[3000][3000];
 }					t_mlx;
 
 void				print_y(t_mlx *mlx);
