@@ -18,7 +18,7 @@ void		print_y(t_mlx *mlx)
 			if (mlx->pix[x][y].next_y != 0)
 			{
 				//mlx->img_str[i * mlx->sl / 4 + 0] = 0xFFFFFF;
-				print_lines(mlx->pix[x][y].x, mlx->pix[x][y].x, mlx->pix[x][y].y, mlx->pix[x][y].next_y, mlx);
+//				print_lines(mlx->pix[x][y].x, mlx->pix[x][y].x, mlx->pix[x][y].y, mlx->pix[x][y].next_y, mlx);
 			}
 			y++;
 		}
@@ -41,15 +41,7 @@ void		print_x(t_mlx *mlx)
 			if (mlx->pix[x][y].next_x != 0)
 			{
 				//mlx->img_str[i * mlx->sl / 4 + 0] = 0xFFFFFF;
-				i = mlx->pix[x][y].y;
-				if (mlx->pix[x][y].next_y != 0)
-					while (i != mlx->pix[x][y].next_y)
-					{
-						print_lines(mlx->pix[x][y].x, mlx->pix[x][y].next_x, i, i, mlx);
-						i++;
-					}
-				else
-					print_lines(mlx->pix[x][y].x, mlx->pix[x][y].next_x, mlx->pix[x][y].y, mlx->pix[x][y].y, mlx);
+				print_lines(mlx->pix[x][y].nx, mlx->pix[x][y].next_x, mlx->pix[x][y].ny, mlx->pix[mlx->pix[x][y].next_x][y].ny, mlx, mlx->pix[x][y].col);
 			}
 			x++;
 		}
@@ -57,7 +49,7 @@ void		print_x(t_mlx *mlx)
 	}
 }
 
-void		print_lines(int x0, int x1, int y0, int y1, t_mlx *mlx)
+void		print_lines(int x0, int x1, int y0, int y1, t_mlx *mlx, int color)
 {
 	int deltax;
 	int deltay;
@@ -90,7 +82,7 @@ void		print_lines(int x0, int x1, int y0, int y1, t_mlx *mlx)
 	}
 	while (x != x2)
 	{
-		mlx->img_str[y * mlx->sl / 4 + x] = mlx->pix[x0][y0].col;
+		mlx->img_str[y * mlx->sl / 4 + x] = color;
 		error += deltaerr;
 		x++;
 		if (2 * error >= deltax)
@@ -101,9 +93,9 @@ void		print_lines(int x0, int x1, int y0, int y1, t_mlx *mlx)
 	}
 	if (x == x2)
 	{
-		while (y0 != y1)
+		while (y0 != y1 && y0 < y1)
 		{
-			mlx->img_str[y0 * mlx->sl / 4 + x] = mlx->pix[x][y].col;
+			mlx->img_str[y0 * mlx->sl / 4 + x] = color;
 			y0++;
 		}
 	}
@@ -137,18 +129,17 @@ void	spin_x(t_mlx *mlx)
 {
 	int		x;
 	int		y;
-	int		px;
+	int		py;
 
 	x = 0;
-	while (x < mlx->map_y)
+	while (x < mlx->max_x / 2)
 	{
 		y = 0;
-		while (y < mlx->map_x)
+		while (y < mlx->max_y)
 		{
-			px = mlx->pix[x][y].x;
-//			mlx->pix[mlx->pix[x][y].next_x][y].x = (int)(px * COS(mlx->y) + mlx->pix[x][y].z * SIN(mlx->y));
-			mlx->pix[x][y].x = (int)(px * COS(mlx->y) + mlx->pix[x][y].z * SIN(mlx->y));
-			mlx->pix[x][y].z = (int)((-(px) * SIN(mlx->y)) + mlx->pix[x][y].z * COS(mlx->y));
+			py = mlx->pix[x][y].y;
+			mlx->pix[x][y].ny = (int)(py * COS(mlx->y) + mlx->pix[x][y].nz * SIN(mlx->y));
+			mlx->pix[x][y].nz = (int)((-(py) * SIN(mlx->y)) + mlx->pix[x][y].nz * COS(mlx->y));
 			y++;
 		}
 		x++;
@@ -162,15 +153,14 @@ void	spin_y(t_mlx *mlx)
 	int		py;
 
 	x = 0;
-	while (x < mlx->map_y)
+	while (x < mlx->max_x)
 	{
 		y = 0;
-		while (y < mlx->map_x )
+		while (y < mlx->max_y)
 		{
 			py = mlx->pix[x][y].y;
-			if (mlx->pix[x][y].y != 0)
-				mlx->pix[x][y].next_y = (int)(py * COS(mlx->y) + mlx->pix[x][y].z * SIN(mlx->y));
-			mlx->pix[x][y].z = (int)((-(py) * SIN(mlx->y)) + mlx->pix[x][y].z * COS(mlx->y));
+			mlx->pix[x][y].ny = (int)(py * COS(mlx->y) + mlx->pix[x][y].nz * SIN(mlx->y));
+			mlx->pix[x][y].nz = (int)((-(py) * SIN(mlx->y)) + mlx->pix[x][y].nz * COS(mlx->y));
 			y++;
 		}
 		x++;
@@ -212,7 +202,7 @@ void		net_print(t_mlx *mlx)
 		}
 		x = mlx->start[1];
 		i = 0;
-		while (i < mlx->width && x < 1000 && *(mlx->line)++)
+		while (i <= mlx->width && x < 1000 && *(mlx->line))
 		{
 			if (*(mlx->line) > 47 && *(mlx->line) < 58)
 			{
@@ -221,10 +211,13 @@ void		net_print(t_mlx *mlx)
 				mlx->pix[x][y].col = 0xFFFF00;
 				mlx->pix[x][y].x = x;
 				mlx->pix[x][y].y = y;
+				mlx->pix[x][y].nx = x;
+				mlx->pix[x][y].ny = y;
+				mlx->pix[x][y].nz = mlx->pix[x][y].z;
 				//k = y;
 				//while (k < y + mlx->space)
 				//{
-					mlx->pix[x][y].col = 0xFFFFFF;//0x000000 + (mlx->pix[x][y].z * 20);
+				mlx->pix[x][y].col = 0xFFFFFF;//0x000000 + (mlx->pix[x][y].z * 20);
 				//	k++;
 				//}
 				i++;
@@ -244,11 +237,12 @@ void		net_print(t_mlx *mlx)
 				col = ft_atoi_hex(&*(mlx->line) + 1);
 				//while (k < mlx->pix[x - mlx->space][y].next_y)
 				//{
-					mlx->pix[x - mlx->space][y].col = col;
+				mlx->pix[x - mlx->space][y].col = col;
 				//	k++;
 				//}
 				mlx->line = &(*mlx->line) + 9;
 			}
+			mlx->line++;
 		}
 		j++;
 		y += mlx->space;
@@ -264,6 +258,6 @@ void		net_print(t_mlx *mlx)
 	spin_x(mlx);
 //	spin_y(mlx);
 	print_x(mlx);
-	print_y(mlx);
+//	print_y(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
 }

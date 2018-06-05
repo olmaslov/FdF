@@ -35,7 +35,7 @@ int			main(int argc, char **argv)
 		mlx->img_str = (int *)mlx_get_data_addr(mlx->img_ptr,
 												&(mlx->bpp), &(mlx->sl), &(mlx->end));
 		mlx->x = 25;
-		mlx->y = 5;
+		mlx->y = 90;
 		read_file(mlx);
 		net_print(mlx);
 //		print_lines(0,1000,0,1000, mlx);

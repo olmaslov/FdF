@@ -5,8 +5,8 @@
 #ifndef FDF_LINUX_FDF_H
 # define FDF_LINUX_FDF_H
 # define PI 3.14159265359
-# define SIN(val) sin(val * PI / 180)
-# define COS(val) cos(val * PI / 180)
+# define SIN(val) sin(val * PI / 90)
+# define COS(val) cos(val * PI / 90)
 
 #include "libft/includes/libft.h"
 #include "libft/includes/get_next_line.h"
@@ -59,7 +59,7 @@ typedef	struct		s_mlx
 void				print_y(t_mlx *mlx);
 void				print_x(t_mlx *mlx);
 void				read_file(t_mlx *mlx);
-void				print_lines(int x0, int x1, int y0, int y1, t_mlx *mlx);
+void				print_lines(int x0, int x1, int y0, int y1, t_mlx *mlx, int color);
 void				net_print(t_mlx *mlx);
 
 #endif //FDF_LINUX_FDF_H
