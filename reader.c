@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reader.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: omaslov <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/05 13:47:23 by omaslov           #+#    #+#             */
+/*   Updated: 2018/06/05 13:47:25 by omaslov          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 static int	count_points(char *line)
@@ -26,7 +38,7 @@ void		read_file(t_mlx *mlx)
 {
 	int		fd;
 	int		tmpclp;
-	int 	height;
+	int		height;
 	char	*tmpln;
 
 	tmpclp = 0;
@@ -37,8 +49,8 @@ void		read_file(t_mlx *mlx)
 	{
 		if (tmpclp == 0)
 			tmpclp = count_points(tmpln);
-//		else if (tmpclp != count_points(tmpln))
-//			exit(write(1, "Map error", 9));
+		else if (tmpclp != count_points(tmpln))
+			exit(write(1, "Map error", 9));
 		tmpln = ft_strjoin(tmpln, " ");
 		mlx->line = ft_strjoin(mlx->line, tmpln);
 		height++;

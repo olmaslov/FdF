@@ -1,6 +1,14 @@
-//
-// Created by Oleksii MASLOV on 5/19/18.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: omaslov <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/05 13:47:14 by omaslov           #+#    #+#             */
+/*   Updated: 2018/06/05 13:47:18 by omaslov          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef FDF_LINUX_FDF_H
 # define FDF_LINUX_FDF_H
@@ -28,6 +36,8 @@ typedef	struct		s_pixel
 	int 			nz;
 	int				next_x;
 	int 			next_y;
+	int				prev_x;
+	int				prev_y;
 	int				col;
 }					t_pixel;
 
@@ -53,6 +63,7 @@ typedef	struct		s_mlx
 	int 			map_y;
 	int 			space;
 	int				start[2];
+	int 			animate;
 	t_pixel			pix[3000][3000];
 }					t_mlx;
 
@@ -60,6 +71,10 @@ void				print_y(t_mlx *mlx);
 void				print_x(t_mlx *mlx);
 void				read_file(t_mlx *mlx);
 void				print_lines(int x0, int x1, int y0, int y1, t_mlx *mlx, int color);
-void				net_print(t_mlx *mlx);
+int					net_print(t_mlx *mlx);
+void				spin_x(t_mlx *mlx);
+void				spin_y(t_mlx *mlx);
+void				spin_z(t_mlx *mlx);
+int 				draw(t_mlx *mlx);
 
 #endif //FDF_LINUX_FDF_H

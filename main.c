@@ -1,21 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: omaslov <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/05 13:14:28 by omaslov           #+#    #+#             */
+/*   Updated: 2018/06/05 13:14:31 by omaslov          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
+
+/*
+** 53 escape for mac, on linux 65307
+** 78 - on mac keyboard, on linux 65453
+*/
 
 static int	my_key_funct(int keycode, t_mlx *mlx)
 {
 	if (keycode == 53 || keycode == 65307)
 		exit(0);
-/*	if (keycode == 49) 												*/
-/*		drawCircle(500, 500, mlx->i++, mlx);*/
-	if (keycode == 78)
+	if (keycode == 78 || keycode == 65453)
 	{
-		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
-		mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr);
-		mlx->img_ptr = mlx_new_image(mlx->mlx_ptr, 1000, 1000);
-		mlx->img_str = (int *)mlx_get_data_addr(mlx->img_ptr,
-												&(mlx->bpp), &(mlx->sl), &(mlx->end));
-		mlx->space--;
-		net_print(mlx);
+		if (mlx->animate == 1)
+			mlx->animate = 0;
+		else
+			mlx->animate = 1;
 	}
+	if (keycode == 6)
+		spin_z(mlx);
+	if (keycode == 7)
+		spin_x(mlx);
+	if (keycode == 8)
+		spin_y(mlx);
 	return (0);
 }
 
@@ -34,12 +52,10 @@ int			main(int argc, char **argv)
 		mlx->img_ptr = mlx_new_image(mlx->mlx_ptr, 1000, 1000);
 		mlx->img_str = (int *)mlx_get_data_addr(mlx->img_ptr,
 												&(mlx->bpp), &(mlx->sl), &(mlx->end));
-		mlx->x = 25;
-		mlx->y = 90;
+		mlx->x = 40;
+		mlx->y = 1;
 		read_file(mlx);
-		net_print(mlx);
-//		print_lines(0,1000,0,1000, mlx);
-//		print_lines(500,0,1000,0, mlx);
+		mlx_loop_hook(mlx->mlx_ptr, draw, mlx);
 		mlx_loop(mlx->mlx_ptr);
 		free(mlx);
 	}
