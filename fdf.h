@@ -28,16 +28,14 @@
 
 typedef	struct		s_pixel
 {
-	int 			x;
-	int 			y;
-	int 			z;
-	int 			ny;
-	int 			nx;
-	int 			nz;
-	int				next_x;
-	int 			next_y;
-	int				prev_x;
-	int				prev_y;
+	float 			x;
+	float 			y;
+	float 			z;
+	float 			ny;
+	float 			nx;
+	float 			nz;
+	float			next_x;
+	float 			next_y;
 	int				col;
 }					t_pixel;
 
@@ -54,16 +52,19 @@ typedef	struct		s_mlx
 	int 			width;
 	int				height;
 	int 			sl;
-	int 			end;
+	int				start_x;
+	int				start_y;
+	int 			img_end;
 	int 			bpp;
 	int 			i;
 	int				x;
 	int 			y;
-	int				map_x;
-	int 			map_y;
-	int 			space;
-	int				start[2];
+	int 			z;
+	int 			move_x;
+	int             move_y;
+	float 			space;
 	int 			animate;
+	float			set;
 	t_pixel			pix[3000][3000];
 }					t_mlx;
 
@@ -76,5 +77,6 @@ void				spin_x(t_mlx *mlx);
 void				spin_y(t_mlx *mlx);
 void				spin_z(t_mlx *mlx);
 int 				draw(t_mlx *mlx);
+void 				zoom(t_mlx *mlx);
 
 #endif //FDF_LINUX_FDF_H
