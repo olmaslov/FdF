@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_nbrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omaslov <omaslov@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: omaslov <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/28 19:10:44 by omaslov           #+#    #+#             */
-/*   Updated: 2017/11/09 13:19:23 by omaslov          ###   ########.fr       */
+/*   Created: 2018/06/07 22:43:03 by omaslov           #+#    #+#             */
+/*   Updated: 2018/06/07 22:43:06 by omaslov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int		ft_nbrlen(int num)
 {
-	size_t	sz;
+	int i;
 
-	sz = ft_strlen(s) + 1;
-	return ((char *)ft_memchr((void *)s, c, sz));
+	i = 0;
+	if (num == 0)
+		return (1);
+	if (num < 0)
+		i++;
+	while (num)
+	{
+		num /= 10;
+		i++;
+	}
+	return (i);
 }

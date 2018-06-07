@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_join.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omaslov <omaslov@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: omaslov <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/02 13:27:09 by omaslov           #+#    #+#             */
-/*   Updated: 2017/11/08 21:13:55 by omaslov          ###   ########.fr       */
+/*   Created: 2018/06/07 22:12:02 by omaslov           #+#    #+#             */
+/*   Updated: 2018/06/07 22:12:06 by omaslov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_join(char *s1, char *s2, int k1, int k2)
 {
 	char	*sc;
 
@@ -23,6 +23,10 @@ char	*ft_strjoin(char *s1, char *s2)
 	{
 		ft_strcat(sc, s1);
 		ft_strcat(sc, s2);
+		if (k1 && s1[0])
+			free(s1);
+		if (k2 && s2[0])
+			free(s2);
 		return (sc);
 	}
 	return (NULL);

@@ -13,29 +13,23 @@
 #ifndef FDF_LINUX_FDF_H
 # define FDF_LINUX_FDF_H
 # define PI 3.14159265359
-# define SIN(val) sin(val * PI / 90)
-# define COS(val) cos(val * PI / 90)
-
-#include "libft/includes/libft.h"
-#include "libft/includes/get_next_line.h"
-#include <stdlib.h>
-#include "math.h"
-#include "mlx.h"
-#include "stdio.h"
-#include "unistd.h"
-
-
+# define SIN(val) sinf(val * PI / 90)
+# define COS(val) cosf(val * PI / 90)
+# include "libft/includes/libft.h"
+# include "libft/includes/get_next_line.h"
+# include <stdlib.h>
+# include "math.h"
+# include "mlx.h"
+# include "stdio.h"
+# include "unistd.h"
 
 typedef	struct		s_pixel
 {
-	float 			x;
-	float 			y;
-	float 			z;
-	float 			ny;
-	float 			nx;
-	float 			nz;
+	float			y;
+	float			x;
+	float			z;
 	float			next_x;
-	float 			next_y;
+	float			next_y;
 	int				col;
 }					t_pixel;
 
@@ -43,40 +37,79 @@ typedef	struct		s_mlx
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
-	void 			*img_ptr;
+	void			*img_ptr;
 	char			*file;
-	char 			*line;
-	int 			*img_str;
-	int 			max_y;
-	int 			max_x;
-	int 			width;
+	char			*line;
+	int				*img_str;
+	int				max_y;
+	int				max_x;
+	int				width;
 	int				height;
-	int 			sl;
+	int				sl;
 	int				start_x;
 	int				start_y;
-	int 			img_end;
-	int 			bpp;
-	int 			i;
+	int				img_end;
+	int				bpp;
+	int				i;
 	int				x;
-	int 			y;
-	int 			z;
-	int 			move_x;
-	int             move_y;
-	float 			space;
-	int 			animate;
+	int				y;
+	int				z;
+	int				move_x;
+	int				move_y;
+	float			space;
+	int				animate;
 	float			set;
-	t_pixel			pix[3000][3000];
+	t_pixel			pix[1000][1000];
 }					t_mlx;
+
+typedef struct		s_draw
+{
+	int				y;
+	int				x;
+	int				i;
+	int				j;
+	int				z;
+	int				col;
+}					t_draw;
+
+typedef struct		s_brz
+{
+	int				dx;
+	int				dy;
+	int				sx;
+	int				sy;
+	int				x;
+	int				y;
+	int				i;
+	int				d;
+	int				d1;
+	int				d2;
+}					t_brz;
+
+typedef struct		s_brz_in
+{
+	int				color;
+	int				x0;
+	int				x1;
+	int				y0;
+	int				y1;
+}					t_brz_in;
 
 void				print_y(t_mlx *mlx);
 void				print_x(t_mlx *mlx);
 void				read_file(t_mlx *mlx);
-void				print_lines(int x0, int x1, int y0, int y1, t_mlx *mlx, int color);
-int					net_print(t_mlx *mlx);
+void				brezenham(t_mlx *mlx, t_brz_in *brz_in);
+int					map_init(t_mlx *mlx);
 void				spin_x(t_mlx *mlx);
 void				spin_y(t_mlx *mlx);
 void				spin_z(t_mlx *mlx);
-int 				draw(t_mlx *mlx);
-void 				zoom(t_mlx *mlx);
+int					draw_loop(t_mlx *mlx);
+void				zoom(t_mlx *mlx);
+void				center(t_mlx *mlx);
+void				rev_center(t_mlx *mlx);
+int					ft_nbrlen(int num);
+int					ft_atoi_hex(char *str);
+void				print_instruction(t_mlx *mlx);
+int					keys(int keycode, t_mlx *mlx);
 
-#endif //FDF_LINUX_FDF_H
+#endif

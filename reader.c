@@ -19,7 +19,7 @@ static int	count_points(char *line)
 
 	i = 0;
 	clp = 0;
-	while (line[i])
+	while (i < (int)ft_strlen(line))
 	{
 		if (line[i] > 47 && line[i] < 58)
 		{
@@ -28,7 +28,8 @@ static int	count_points(char *line)
 			clp++;
 		}
 		if (line[i] == ',')
-			i += 9;
+			while (line[i + 1] != ' ')
+				i++;
 		i++;
 	}
 	return (clp);
@@ -51,10 +52,9 @@ void		read_file(t_mlx *mlx)
 			tmpclp = count_points(tmpln);
 		else if (tmpclp != count_points(tmpln))
 			exit(write(1, "Map error", 9));
-		tmpln = ft_strjoin(tmpln, " ");
-		mlx->line = ft_strjoin(mlx->line, tmpln);
+		tmpln = ft_join(tmpln, " ", 1, 0);
+		mlx->line = ft_join(mlx->line, tmpln, 1, 1);
 		height++;
-		free(tmpln);
 	}
 	mlx->width = tmpclp;
 	mlx->height = height;

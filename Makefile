@@ -13,11 +13,11 @@
 .PHONY: all, compile, clean, fclean, re
 
 NAME = fdf
-SRC = main.c reader.c drawer.c
+SRC = main.c reader.c drawer.c brezenham.c map_init.c spin.c keys.c
 INC_LIBFT = ./libft/includes
 CC = gcc
-FLAG = -Wall -Wextra -Werror
-MLX_LINK = -lmlx -lXext -l X11 -L libft/ -lft
+FLAG = -Wall -Wextra -Werror -L libft/ -lft
+MLX_LINK = -lmlx -framework OpenGL -framework AppKit
 OBJ = $(subst .c, .o, $(SRC))
 
 all: compile

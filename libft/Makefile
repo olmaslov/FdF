@@ -75,7 +75,10 @@ FILES =  ft_atoi.c\
    ft_writeendl.c\
    ft_minimalize.c\
    ft_delcomm.c\
-   get_next_line.c
+   get_next_line.c\
+   ft_join.c\
+   ft_atoi_hex.c\
+   ft_nbrlen.c
 
 OBJ = $(FILES:%.c=%.o)
 

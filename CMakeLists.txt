@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 3.9)
 
 project(fdf_linux)
 
-
-
 set(SOURCE_FILES main.c fdf.h reader.c libft/ft_atoi.c
         libft/ft_bzero.c
         libft/ft_delcomm.c
@@ -71,7 +69,8 @@ set(SOURCE_FILES main.c fdf.h reader.c libft/ft_atoi.c
         libft/get_next_line.c
         libft/includes/libft.h
         libft/includes/get_next_line.h
-        drawer.c)
+        libft/ft_nbrlen.c
+        drawer.c libft/ft_join.c spin.c map_init.c brezenham.c libft/ft_atoi_hex.c keys.c)
 
 add_executable(fdf_linux ${SOURCE_FILES})
 #include_directories(/usr/local/include)
