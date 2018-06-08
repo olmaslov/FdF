@@ -27,17 +27,23 @@ static void	init_fdf(t_mlx *mlx)
 	mlx->z = 1;
 	mlx->move_x = 0;
 	mlx->move_y = 0;
-	read_file(mlx);
-	map_init(mlx);
+	mlx->instruction = 1;
+	read_file(mlx, 0, 0);
+
 }
 
 void		print_instruction(t_mlx *mlx)
 {
-	char *tmp;
-
-	tmp = ft_itoa(mlx->x);
-	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 1, 1, 0xFFFFFF, tmp);
-	free(tmp);
+	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 1, 1, 0xFFFFFF,
+				   "Keys:");
+	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 1, 15, 0xFFFFFF,
+				   "I - instructions");
+	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 1, 30, 0xFFFFFF,
+				   "Z,A - spin Z; X,S - spin X; C,D - spin Y");
+	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 1, 45, 0xFFFFFF,
+				   "R - rotate animation");
+	mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 1, 60, 0xFFFFFF,
+				   "Arrows - move map; +,- - zoom");
 }
 
 int			main(int argc, char **argv)
@@ -50,13 +56,14 @@ int			main(int argc, char **argv)
 		mlx->file = argv[1];
 		mlx_init();
 		mlx->mlx_ptr = mlx_init();
+		init_fdf(mlx);
 		mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, 1000, 1000, "mlx test");
 		mlx_hook(mlx->win_ptr, 2, 5, keys, mlx);
 		mlx_hook(mlx->win_ptr, 17, 1L << 17, exit_x, mlx);
 		mlx->img_ptr = mlx_new_image(mlx->mlx_ptr, 1000, 1000);
 		mlx->img_str = (int *)mlx_get_data_addr(mlx->img_ptr,
 							&(mlx->bpp), &(mlx->sl), &(mlx->img_end));
-		init_fdf(mlx);
+		map_init(mlx);
 		mlx_loop_hook(mlx->mlx_ptr, draw_loop, mlx);
 		mlx_loop(mlx->mlx_ptr);
 		free(mlx);

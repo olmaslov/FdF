@@ -58,6 +58,7 @@ typedef	struct		s_mlx
 	int				move_y;
 	float			space;
 	int				animate;
+	int 			instruction;
 	float			set;
 	t_pixel			pix[1000][1000];
 }					t_mlx;
@@ -97,7 +98,7 @@ typedef struct		s_brz_in
 
 void				print_y(t_mlx *mlx);
 void				print_x(t_mlx *mlx);
-void				read_file(t_mlx *mlx);
+void				read_file(t_mlx *mlx, int tmpclp, int height);
 void				brezenham(t_mlx *mlx, t_brz_in *brz_in);
 int					map_init(t_mlx *mlx);
 void				spin_x(t_mlx *mlx);
@@ -105,6 +106,7 @@ void				spin_y(t_mlx *mlx);
 void				spin_z(t_mlx *mlx);
 int					draw_loop(t_mlx *mlx);
 void				zoom(t_mlx *mlx);
+void				move_map(t_mlx *mlx);
 void				center(t_mlx *mlx);
 void				rev_center(t_mlx *mlx);
 int					ft_nbrlen(int num);

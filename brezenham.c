@@ -66,10 +66,30 @@ static void	brez_y(t_mlx *mlx, t_brz *brz, t_brz_in *brz_in)
 	}
 }
 
+static void	brz_zoom(t_mlx *mlx, t_brz_in *brz_in)
+{
+	if (mlx->max_y && mlx->max_x)
+	{
+		brz_in->x0 -= mlx->max_x / 2;
+		brz_in->y0 -= mlx->max_y / 2;
+		brz_in->x1 -= mlx->max_x / 2;
+		brz_in->y1 -= mlx->max_y / 2;
+		brz_in->x0 *= mlx->set;
+		brz_in->y0 *= mlx->set;
+		brz_in->x1 *= mlx->set;
+		brz_in->y1 *= mlx->set;
+		brz_in->x0 += mlx->max_x / 2;
+		brz_in->y0 += mlx->max_y / 2;
+		brz_in->x1 += mlx->max_x / 2;
+		brz_in->y1 += mlx->max_y / 2;
+	}
+}
+
 void		brezenham(t_mlx *mlx, t_brz_in *brz_in)
 {
 	t_brz *brz;
 
+	brz_zoom(mlx, brz_in);
 	brz = (t_brz*)malloc(sizeof(t_brz));
 	brz->dx = abs(brz_in->x1 - brz_in->x0);
 	brz->dy = abs(brz_in->y1 - brz_in->y0);

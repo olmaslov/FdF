@@ -30,8 +30,11 @@ int		ft_atoi_hex(char *str)
 		else if (str[i] >= 65 && str[i] <= 70)
 			nb = (nb * 16) + (str[i] - 55);
 		else
-			return (nb);
+			break ;
 		i++;
 	}
-	return (nb);
+	if (i == 8)
+		return (nb);
+	else
+		return (-1);
 }

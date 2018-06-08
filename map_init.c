@@ -41,8 +41,11 @@ static void	point_set(t_mlx *mlx, t_draw *dw)
 			mlx->pix[dw->x][dw->y].next_y = dw->y + mlx->space;
 		if (dw->x + mlx->space < 1000 && dw->i != mlx->width)
 			mlx->pix[dw->x][dw->y].next_x = dw->x + mlx->space;
-		mlx->max_y = (int)(dw->y + mlx->space);
-		mlx->max_x = (int)(dw->x + mlx->space);
+		if (mlx->height != 1 && mlx->width != 1)
+		{
+			mlx->max_x = (int)(dw->x + mlx->space);
+			mlx->max_y = (int)(dw->y + mlx->space);
+		}
 		dw->x += mlx->space;
 	}
 	put_point_color(mlx, dw);
@@ -52,12 +55,13 @@ static void	fill_map(t_mlx *mlx, t_draw *dw)
 {
 	while (*(mlx->line) && dw->j < mlx->height)
 	{
-		dw->x = (980 - (((int)mlx->space * mlx->width) - (int)mlx->space)) / 2;
+		dw->x = (1000 - (((int)mlx->space * mlx->width) - (int)mlx->space)) / 2;
 		dw->i = 0;
 		while (dw->i < mlx->width && dw->x < 1000 && *(mlx->line))
 		{
 			point_set(mlx, dw);
-			while ((*(mlx->line) > 47 && *(mlx->line) < 58) || *(mlx->line) == '-')
+			while ((*(mlx->line) > 47 && *(mlx->line) < 58) ||
+					*(mlx->line) == '-')
 				mlx->line++;
 			if (*mlx->line == ' ')
 				mlx->line++;
@@ -75,14 +79,14 @@ int			map_init(t_mlx *mlx)
 	dw = (t_draw*)malloc(sizeof(t_draw));
 	s = &(*mlx->line);
 	if (!mlx->space)
-		mlx->space = (980 / (((mlx->width >= mlx->height) ?
+		mlx->space = (1000 / (((mlx->width >= mlx->height) ?
 							mlx->width : mlx->height)));
 	if (mlx->width >= mlx->height)
-		dw->y = (980 - (((int)mlx->space * mlx->height) - (int)mlx->space)) / 2;
+		dw->y = (1000 - (((int)mlx->space * mlx->height) - (int)mlx->space)) / 2;
 	else
-		dw->y = (980 - ((int)mlx->space * (mlx->height - 1))) / 2;
+		dw->y = (1000 - ((int)mlx->space * (mlx->height - 1))) / 2;
 	dw->j = 0;
-	dw->x = (980 - (((int)mlx->space * mlx->width) - (int)mlx->space)) / 2;
+	dw->x = (1000 - (((int)mlx->space * mlx->width) - (int)mlx->space)) / 2;
 	mlx->start_x = dw->x;
 	mlx->start_y = dw->y;
 	fill_map(mlx, dw);
