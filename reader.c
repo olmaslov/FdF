@@ -16,11 +16,15 @@ static int	count_points(char *line)
 {
 	int clp;
 	int i;
+	int	sl;
 
 	i = 0;
 	clp = 0;
-	while (i < (int)ft_strlen(line))
+	sl = (int)ft_strlen(line);
+	while (i < sl)
 	{
+		if (line[i] == '-')
+			i++;
 		if (line[i] > 47 && line[i] < 58)
 		{
 			while (line[i + 1] > 47 && line[i + 1] < 58)

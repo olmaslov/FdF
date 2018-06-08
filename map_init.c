@@ -25,13 +25,13 @@ static void	put_point_color(t_mlx *mlx, t_draw *dw)
 
 static void	point_set(t_mlx *mlx, t_draw *dw)
 {
-	if (*(mlx->line) > 47 && *(mlx->line) < 58)
+	if ((*(mlx->line) > 47 && *(mlx->line) < 58) || *(mlx->line) == '-')
 	{
 		mlx->pix[dw->x][dw->y].x = dw->x;
 		mlx->pix[dw->x][dw->y].y = dw->y;
 		dw->z = ft_atoi(&*(mlx->line));
 		mlx->pix[dw->x][dw->y].z = dw->z * mlx->space;
-		mlx->line = &(*mlx->line) + ft_nbrlen(dw->z);
+		mlx->line = mlx->line + ft_nbrlen(dw->z);
 		if (mlx->pix[dw->x][dw->y].z > 0)
 			mlx->pix[dw->x][dw->y].col = (256 * (0x009f00 - dw->z));
 		else
@@ -58,7 +58,7 @@ static void	fill_map(t_mlx *mlx, t_draw *dw)
 		{
 			point_set(mlx, dw);
 			while ((*(mlx->line) > 47 && *(mlx->line) < 58) || *(mlx->line) == '-')
-				mlx->line = &(*mlx->line) + 1;
+				mlx->line++;
 			if (*mlx->line == ' ')
 				mlx->line++;
 		}
