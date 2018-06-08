@@ -50,6 +50,7 @@ void		read_file(t_mlx *mlx)
 	height = 0;
 	fd = open(mlx->file, O_RDONLY);
 	mlx->line = "";
+	tmpln = NULL;
 	while (get_next_line(fd, &(tmpln)) > 0)
 	{
 		if (tmpclp == 0)
@@ -60,8 +61,11 @@ void		read_file(t_mlx *mlx)
 		mlx->line = ft_join(mlx->line, tmpln, 1, 1);
 		height++;
 	}
-	mlx->width = tmpclp;
-	mlx->height = height;
 	if (!tmpln)
 		exit(write(1, "FILE ERROR\n", 10));
+	else
+	{
+		mlx->width = tmpclp;
+		mlx->height = height;
+	}
 }
