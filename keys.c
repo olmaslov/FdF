@@ -66,15 +66,9 @@ static int	keys_spin(int keycode, t_mlx *mlx)
 static int	keys_zoom(int keycode, t_mlx *mlx)
 {
 	if (keycode == 78 || keycode == 65453)
-	{
 		mlx->set *= 0.95;
-//		zoom(mlx);
-	}
 	if (keycode == 69)
-	{
 		mlx->set *= 1.05;
-//		zoom(mlx);
-	}
 	return (0);
 }
 
@@ -100,7 +94,10 @@ static int	keys_move(int keycode, t_mlx *mlx)
 int			keys(int keycode, t_mlx *mlx)
 {
 	if (keycode == 53 || keycode == 65307)
+	{
+		system("leaks fdf_linux");
 		exit(0);
+	}
 	if (keycode == 15)
 	{
 		if (mlx->animate == 1)

@@ -23,12 +23,12 @@ static int	hex_and_space(char *line)
 		if (ft_atoi_hex(line + i) >= 0)
 			i += 8;
 		else
-			return (0);
+			return (-1);
 	}
 	if (line[i] == ' ' || line[i] == '-')
 		i++;
 	else if (line[i])
-		return (0);
+		return (-1);
 	return (i);
 }
 
@@ -37,6 +37,7 @@ static int	count_points(char *line)
 	int clp;
 	int i;
 	int	sl;
+	int ahex;
 
 	i = 0;
 	clp = 0;
@@ -52,7 +53,10 @@ static int	count_points(char *line)
 			clp++;
 			i++;
 		}
-		i += hex_and_space(line + i);
+		if ((ahex = hex_and_space(line + i)) >= 0)
+			i += ahex;
+		else
+			return (0);
 	}
 	return (clp);
 }

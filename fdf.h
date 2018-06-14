@@ -58,7 +58,7 @@ typedef	struct		s_mlx
 	int				move_y;
 	float			space;
 	int				animate;
-	int 			instruction;
+	int				instruction;
 	float			set;
 	t_pixel			pix[1000][1000];
 }					t_mlx;

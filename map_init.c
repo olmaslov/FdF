@@ -82,7 +82,8 @@ int			map_init(t_mlx *mlx)
 		mlx->space = (1000 / (((mlx->width >= mlx->height) ?
 							mlx->width : mlx->height)));
 	if (mlx->width >= mlx->height)
-		dw->y = (1000 - (((int)mlx->space * mlx->height) - (int)mlx->space)) / 2;
+		dw->y = (1000 - (((int)mlx->space * mlx->height) -
+				(int)mlx->space)) / 2;
 	else
 		dw->y = (1000 - ((int)mlx->space * (mlx->height - 1))) / 2;
 	dw->j = 0;
